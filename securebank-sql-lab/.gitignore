@@ -1,4 +1,6 @@
 .env
+.ngrok2/
+ngrok.yml
 *.log
 .DS_Store
 node_modules

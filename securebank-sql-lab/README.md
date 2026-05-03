@@ -37,6 +37,62 @@ http://HOST_IP:8080
 
 `HOST_IP`, Docker'i calistiran egitmen bilgisayarinin yerel ag IP adresidir.
 
+## Opsiyonel: ngrok ile public link açma
+
+Okul Wi-Fi ağında cihazlar birbirine erişemiyorsa Adminer panelini geçici public linke çevirmek için kullanılabilir. Bu yöntem mevcut Docker Compose yapısını değiştirmez; sadece bu bilgisayardaki `http://localhost:8080` Adminer paneli için geçici bir HTTP tüneli açar.
+
+**Güvenlik uyarısı:** Bu yöntem Adminer login ekranını internete açar. Sadece etkinlik sırasında kullanın, etkinlik bitince ngrok’u kapatın. PostgreSQL portu `5432` için ngrok tüneli açmayın.
+
+Arch/CachyOS icin ngrok kurulumu:
+
+```bash
+sudo pacman -S ngrok
+```
+
+Eger pacman paketi yoksa:
+
+```bash
+yay -S ngrok
+```
+
+Alternatif olarak resmi ngrok indirme sayfasindan kurulum yapabilirsiniz:
+
+```text
+https://ngrok.com/download
+```
+
+ngrok hesabinizdan aldiginiz auth token'i kendi bilgisayarinizda bir kez tanimlayin:
+
+```bash
+ngrok config add-authtoken YOUR_TOKEN
+```
+
+Gercek token'i repository'ye commit etmeyin. `.env` dosyasi kullaniliyorsa ignore altinda kalmalidir; bu repo `.env`, `.ngrok2/`, `ngrok.yml` ve `*.log` dosyalarini ignore eder.
+
+Kullanim:
+
+```bash
+docker compose up -d
+./start-ngrok.sh
+```
+
+Terminalde `Forwarding` satirinda buna benzer bir URL gorursunuz:
+
+```text
+https://example.ngrok-free.app
+```
+
+Ogrenciler bu URL'yi tarayicida acar.
+
+## Workshop safety checklist
+
+- Yerel ag disina aciyorsaniz guclu DB sifreleri kullanin.
+- ngrok linkini sadece katilimcilarla paylasin.
+- Atolye bitince ngrok'u durdurun.
+- PostgreSQL portu `5432` icin public tunnel acmayin.
+- Mümkün olduğunda yerel ağ erişimini tercih edin.
+- Public erisimden sonra lab sifrelerini yenileyin veya sifirlayin.
+
 ## Adminer Giris Bilgileri
 
 - System: `PostgreSQL`
