@@ -1,4 +1,4 @@
--- DB07 - AI SQL Workflow and Validation Lab
+    -- DB07 - AI SQL Workflow and Validation Lab
 -- This database is for validating AI-generated SQL before using it.
 -- Students should compare generated_sql and corrected_sql, then use the
 -- validation_checklist as human review steps.
